@@ -1,5 +1,9 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+  import type { PollType } from '../types';
   import Button from '../shared/Button.svelte';
+
+  let dispatch = createEventDispatcher();
 
   let fields = {
     question: '',
@@ -44,7 +48,20 @@
 
     // add new poll
     if (valid) {
-      console.log('valid', fields);
+      let poll: PollType = {
+        id: Math.random(),
+        ...fields,
+        votesA: 0,
+        votesB: 0,
+      };
+
+      dispatch('add', poll);
+
+      fields = {
+        question: '',
+        answerA: '',
+        answerB: '',
+      };
     }
   };
 </script>

@@ -25,7 +25,7 @@
     },
     {
       id: 2,
-      question: 'How are you',
+      question: 'How are you?',
       answerA: 'Fine',
       answerB: 'Sad',
       votesA: 12,

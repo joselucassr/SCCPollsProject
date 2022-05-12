@@ -6,18 +6,33 @@
 
   // reactive values
   $: totalVotes = poll.votesA + poll.votesB;
+
+  // handling votes
+  const handleVote = (options: string): void => {
+    poll[`votes${options}`] += 1;
+  };
 </script>
 
 <Card>
   <div class="poll">
     <h3>{poll.question}</h3>
     <p>Total votes: {totalVotes}</p>
-    <div class="answer">
+    <div
+      class="answer"
+      on:click={() => {
+        handleVote('A');
+      }}
+    >
       <div class="percent percent-a" />
       <span>{poll.answerA} ({poll.votesA})</span>
     </div>
 
-    <div class="answer">
+    <div
+      class="answer"
+      on:click={() => {
+        handleVote('B');
+      }}
+    >
       <div class="percent percent-b" />
       <span>{poll.answerB} ({poll.votesB})</span>
     </div>

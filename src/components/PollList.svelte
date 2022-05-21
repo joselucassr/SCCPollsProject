@@ -1,17 +1,19 @@
 <script lang="ts">
+  // import { onDestroy, onMount } from 'svelte';
   import PollStore from '../stores/PollStore';
-  import type { PollType } from '../types';
   import PollDetails from './PollDetails.svelte';
 
-  let polls: PollType[] = [];
+  // const unsub = PollStore.subscribe((data) => {
+  //   polls = data;
+  // });
 
-  PollStore.subscribe((data) => {
-    polls = data;
-  });
+  // onDestroy(() => {
+  //   unsub();
+  // });
 </script>
 
 <div class="poll-list">
-  {#each polls as poll (poll.id)}
+  {#each $PollStore as poll (poll.id)}
     <PollDetails {poll} />
   {/each}
 </div>

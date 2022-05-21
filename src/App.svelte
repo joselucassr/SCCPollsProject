@@ -15,9 +15,6 @@
   };
 
   const handleAdd = (e): void => {
-    let poll: PollType = e.detail;
-    polls = [poll, ...polls];
-    console.log(polls);
     activeItem = 'Current Polls';
   };
 </script>

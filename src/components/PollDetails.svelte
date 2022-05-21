@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PollStore from '../stores/PollStore';
   import type { PollType } from '../types';
   import Card from '../shared/Card.svelte';
 
@@ -10,8 +11,17 @@
   $: percentB = Math.floor((100 / totalVotes) * poll.votesB);
 
   // handling votes
-  const handleVote = (options: string): void => {
-    poll[`votes${options}`] += 1;
+  const handleVote = (option: string): void => {
+    const { id } = poll;
+
+    PollStore.update((currentPolls) => {
+      let copiedPolls = [...currentPolls];
+      let upvotedPoll = copiedPolls.find((_poll) => _poll.id === id);
+
+      upvotedPoll[`votes${option}`] += 1;
+
+      return copiedPolls;
+    });
   };
 </script>
 

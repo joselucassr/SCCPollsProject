@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PollStore from '../stores/PollStore';
   import { createEventDispatcher } from 'svelte';
   import type { PollType } from '../types';
   import Button from '../shared/Button.svelte';
@@ -55,7 +56,10 @@
         votesB: 0,
       };
 
-      dispatch('add', poll);
+      // save poll to store
+      PollStore.update((currentPolls) => [poll, ...currentPolls]);
+
+      dispatch('add');
 
       fields = {
         question: '',

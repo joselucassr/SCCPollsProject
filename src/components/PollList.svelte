@@ -1,8 +1,13 @@
 <script lang="ts">
+  import PollStore from '../stores/PollStore';
   import type { PollType } from '../types';
   import PollDetails from './PollDetails.svelte';
 
-  export let polls: PollType[] = [];
+  let polls: PollType[] = [];
+
+  PollStore.subscribe((data) => {
+    polls = data;
+  });
 </script>
 
 <div class="poll-list">
